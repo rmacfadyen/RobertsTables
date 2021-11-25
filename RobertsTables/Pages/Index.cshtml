@@ -1,0 +1,69 @@
+﻿@page
+@model IndexModel
+@inject ITableHelperService TableHelper
+@inject IDateFormatter DateFormatter
+@using X.PagedList.Mvc.Core;
+
+@{
+    var thisPageName = ViewContext.RouteData.Values["page"] as string;
+    var thisPageRouteValues = new { Model.SortOrder, Model.PageSize, Model.PageNumber };
+    var thisPageReturnUrl = Url.Page(thisPageName, thisPageRouteValues);
+}
+
+<h1>
+    Trivial demo
+</h1>
+
+<form method="get" autocomplete="off">
+    <input type="hidden" asp-for="@Model.SortOrder" />
+    <input type="hidden" asp-for="@Model.PageSize" />
+    <input type="hidden" asp-for="@Model.PageNumber" />
+
+    <div class="row align-items-center pb-3">
+        <div class="col-auto ms-auto">
+            @Html.PagedListPager(
+                 Model.RecordsForDisplay,
+                 PageNumber => TableHelper.PageUrl(Model.SortOrder, Model.PageSize, PageNumber),
+                 TableHelper.PagedListPagerOptions(Model.RecordsForDisplay.PageCount)
+             )
+
+            @Html.PagedListPageSize(
+                Model.RecordsForDisplay,
+                Model.SortOrder,
+                Model.PageSize
+            )
+        </div>
+    </div>
+
+
+    @(Html.BasicTable(
+        SortOrder: Model.SortOrder,
+        DefaultSortColumn: "Id",
+        PageSize: Model.PageSize,
+        Data: Model.RecordsForDisplay,
+        NoDataMessage: "No records to display",
+        Columns: new[] {
+            new Column<IndexModel.ListEntry> {
+                Caption = "Id",
+                SortBy = "Id",
+                Selectable = true,
+                RowId = i => i.Id.ToString(),
+                CellCss = "nowrap",
+                HtmlContent = (i) => {
+                    var Link = TableHelper.PageLinkWithReturnUrl(i.Id.ToString(), "Details", thisPageReturnUrl, new { id = i.Id });
+                    var CheckBox = TableHelper.RowSelectionCheckbox("SelectedRowIds", Link, i.Id, Model.SelectedRowIds);
+                    return CheckBox;
+                }
+            },
+            new Column<IndexModel.ListEntry> { Caption = "Name", SortBy = "Name", Content = i => i.Name },
+            new Column<IndexModel.ListEntry> { Caption = "Created", SortBy = "CreatedOn", Content = i => DateFormatter.ToStringWithTimeInLocalTime(i.CreatedOn)}
+        }
+    ))
+</form>
+@section Scripts {
+    <script>
+        $(function () {
+            var Table = new Tables.Basic('.table');
+        });
+    </script>
+}

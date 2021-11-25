@@ -1,0 +1,162 @@
+﻿/* Variables */
+:root {
+    --main-bg-color: white;
+    --bs-danger-focus: rgba(220, 53, 69, .25); /*rgba(var(--bs-danger), .25);*/
+    --bs-focus: #86b7fe;
+    --bs-focus-box-shadow: rgb(13 110 253 / 25%);
+}
+
+
+
+/*
+ * for nice looking tables
+ */
+.table {
+    caption-side: top;
+}
+
+.table > caption {
+    font-weight: bold;
+    font-size: 110%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    color: var(--bs-body-color);
+    border-bottom: 1px solid var(--bs-body-color);
+}
+
+.table > thead > tr > th {
+    white-space: nowrap;
+    padding: .25rem;
+    padding-bottom: 0;
+}
+
+.table > thead .Sorted-asc::after {
+    content: '\25bc';
+    padding-left: .5rem;
+    font-size: 75%;
+}
+
+.table > thead .Sorted-desc::after {
+    content: '\25b2';
+    padding-left: .5rem;
+    font-size: 75%;
+}
+
+.table > tbody input {
+    margin-right: .25em;
+}
+
+.table > tbody label {
+    margin-bottom: 0px;
+}
+
+.table > tbody td.nowrap {
+    white-space: nowrap;
+}
+
+.table > TBODY > tr.active > td {
+    border-bottom: 1px solid #D2D6D8;
+    border-top: 0;
+    border-spacing: 0;
+}
+
+.table > TBODY > TR > td {
+    padding: .25rem;
+    vertical-align: top;
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+
+.table.stickyheaders {
+    position: relative;
+    border-collapse: separate;
+}
+
+.table.stickyheaders th {
+    position: sticky;
+    top: -1px;
+    background-color: var(--main-bg-color);
+    z-index: 99;
+    border-top: 0px;
+    padding-top: 0px;
+}
+
+/* Hamburger menu */
+.table th div.dropdown.navbar {
+    display: inline-block;
+    padding: 0;
+    position: absolute;
+    right: 0px;
+}
+
+.table th div.dropdown.navbar button {
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+}
+
+/* change color of hamburger lines*/
+.table th .navbar-light span.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+/* the pagination list of page numbers*/
+.pagination-container {
+    display: inline-block;
+}
+
+ul.pagination {
+    margin-bottom: 0;
+}
+
+.page-sm {
+    vertical-align: bottom;
+}
+
+.page-sm ul {
+    margin-bottom: 0px;
+    vertical-align: bottom;
+}
+
+.page-sm .page-link {
+    border: none;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.page-sm .page-link:hover {
+    background-color: transparent;
+}
+
+.page-sm a.page-link:hover {
+    text-decoration: underline;
+}
+
+/* A disabled page number shows a normal cursor instead of I-bar */
+.pagination .active .page-link {
+    cursor: default;
+}
+
+/* A pagination "link" that's not a link shows in grey with normal cursor */
+.page-item:not(.active) span.page-link {
+    color: #c0c0c0;
+    cursor: default;
+}
+
+/* The page number dropdown show's an underline when hovered and is not a specific width */
+.nav .dropdown .dropdown-toggle:hover {
+    text-decoration: underline;
+}
+
+.nav .dropdown div.dropdown-menu.show {
+    min-width: inherit;
+}
+
+.nav .dropdown a.dropdown-item {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

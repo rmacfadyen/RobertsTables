@@ -1,0 +1,30 @@
+﻿@page
+@model RobertsTables.Pages.DetailsModel
+
+@{
+    var thisPageName = ViewContext.RouteData.Values["page"] as string;
+    var thisPageRouteValues = new { };
+    var thisPageReturnUrl = Url.Page(thisPageName, thisPageRouteValues);
+}
+
+<h1>
+    Trivial demo - Details Page
+</h1>
+
+<p>
+    This is where the details about the clicked record would be shown
+</p>
+
+<div class="row pb-2">
+    <div class="col">
+        @if (string.IsNullOrEmpty(Model.ReturnToUrl))
+        {
+            <a class="btn btn-secondary" asp-page="./Index">Back to list</a>
+        }
+        else
+        {
+            <a class="btn btn-secondary" href="@Model.ReturnToUrl">Back to list</a>
+        }
+
+    </div>
+</div>
